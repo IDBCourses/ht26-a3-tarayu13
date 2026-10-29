@@ -35,7 +35,8 @@ let smallCircle;
 
 // ---------- Sound ----------
 // Make the instruments and plug them into the speakers.
-const synth = new Tone.PolySynth(Tone.Synth).toDestination(); // can play several notes at once
+const synth = new Tone.MonoSynth().toDestination(); // can play several notes at once
+const metalSynth = new Tone.MetalSynth().toDestination();
 
 // ---------- Update ----------
 // Update the state. This is called every 100ms.
@@ -55,8 +56,15 @@ function pointerDown(event) {
   Tone.start(); // browsers only allow sound after the player has pressed something
 
   console.log("Pointer down at", event.clientX, event.clientY);
-  synth.triggerAttackRelease(note, "8n"); // play the note for an eighth note
 }
+
+//Tara Start
+function rectangleClick() {
+  Tone.start();
+  metalSynth.triggerAttackRelease("8n");
+}
+// Tara end
+
 
 // Tara start
 function pointerMove(event) {
@@ -73,8 +81,10 @@ function pointerMove(event) {
       (event.clientX - 25) / window.innerWidth,
       (event.clientY - 25) / window.innerHeight
     );
+    synth.triggerAttackRelease("C4", "12n");
   }
 }
+
 // Tara end
 
 // ---------- Setup ----------
@@ -98,6 +108,19 @@ function setup() {
   rectangle.setRoundedness(0);
   rectangle.setPosition(0.30, 0.35);
   rectangle.setColour(280, 60, 35);
+
+window.addEventListener("keydown", function(event) {
+  if (event.code === "Space", !event.repeat) {
+    rectangle.element.style.transform = "scale(0.95)";
+    metalSynth.triggerAttackRelease("8n");
+  }
+});
+
+window.addEventListener("keyup", function(event) {
+  if (event.code === "Space") {
+    rectangle.element.style.transform = "scale(1)";
+  }
+});
   // Tara - End
 
   // Put your event listener code here
