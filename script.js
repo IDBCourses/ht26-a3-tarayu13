@@ -31,6 +31,7 @@ const note = "C4"; // the note played when the pointer goes down
 // ---------- State ----------
 // State variables are the parts of your program that change over time.
 // For example: where the pointer is, how fast it's moving, or whether a drone is on.
+let smallCircle;
 
 // ---------- Sound ----------
 // Make the instruments and plug them into the speakers.
@@ -57,6 +58,25 @@ function pointerDown(event) {
   synth.triggerAttackRelease(note, "8n"); // play the note for an eighth note
 }
 
+// Tara start
+function pointerMove(event) {
+  const centerX = window.innerWidth * 0.50 + 100;
+  const centerY = window.innerHeight * 0.35 + 100;
+
+  if (
+    event.clientX > centerX - 60 &&
+    event.clientX < centerX + 60 &&
+    event.clientY > centerY - 60 &&
+    event.clientY < centerY + 60
+  ) {
+    smallCircle.setPosition(
+      (event.clientX - 25) / window.innerWidth,
+      (event.clientY - 25) / window.innerHeight
+    );
+  }
+}
+// Tara end
+
 // ---------- Setup ----------
 // Setup is run once, at the start of the program. It sets everything up for us!
 function setup() {
@@ -68,7 +88,7 @@ function setup() {
   example.setPosition(0.50, 0.35);
 
   // Tara - Start
-  const smallCircle = createShape("smallCircle");
+  smallCircle = createShape("smallCircle");
   smallCircle.setSize(50);
   smallCircle.setPosition(0.60, 0.45);
   smallCircle.setColour(30, 100, 50);
@@ -82,7 +102,7 @@ function setup() {
 
   // Put your event listener code here
   window.addEventListener("pointerdown", pointerDown);
+  window.addEventListener("pointermove", pointerMove);
 }
 
 setup(); // Always remember to call setup()!
-
