@@ -1,9 +1,9 @@
 /* No CSS transitions or animations: everything that moves is moved by your code. */
 
 .shape {
-  width: 100px;
-  height: 100px;
-  background-color: deeppink;
+  width: 200px;
+  height: 200px;
+  background-color: rgb(45, 95, 49);
   /* Positioned from the top-left of the window; setPosition() moves it from there. */
   position: absolute;
   top: 0;

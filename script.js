@@ -65,11 +65,24 @@ function setup() {
 
   // Example: a shape near the middle of the window. Replace it with your own.
   const example = createShape("example");
-  example.setPosition(0.5, 0.5);
+  example.setPosition(0.50, 0.35);
+
+  // Tara - Start
+  const smallCircle = createShape("smallCircle");
+  smallCircle.setSize(50);
+  smallCircle.setPosition(0.60, 0.45);
+  smallCircle.setColour(30, 100, 50);
+
+  const rectangle = createShape("rectangle");
+  rectangle.setSize(150, 200);
+  rectangle.setRoundedness(0);
+  rectangle.setPosition(0.30, 0.35);
+  rectangle.setColour(280, 60, 35);
+  // Tara - End
 
   // Put your event listener code here
   window.addEventListener("pointerdown", pointerDown);
 }
 
 setup(); // Always remember to call setup()!
-//testing branch
+
