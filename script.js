@@ -34,6 +34,7 @@ const note = "C4"; // the note played when the pointer goes down
 let smallCircle;
 //new
 let spacePresses = 0;
+let lastSpaceTime = null;
 //new end
 
 //nytt
@@ -62,18 +63,7 @@ function use() {
 
 // ---------- Controls (Event Handlers) ----------
 // Runs every time the pointer goes down: a click, a tap or a pen touch.
-function pointerDown(event) {
-  Tone.start(); // browsers only allow sound after the player has pressed something
 
-  console.log("Pointer down at", event.clientX, event.clientY);
-}
-
-//Tara Start
-function rectangleClick() {
-  Tone.start();
-  metalSynth.triggerAttackRelease("8n");
-}
-// Tara end
 
 
 // Tara start ny
@@ -115,7 +105,7 @@ function pointerMove(event) {
       (event.clientY - 25) / window.innerHeight
     );
 
-    synth.triggerAttackRelease("C4", "12n");
+    synth.triggerAttackRelease(note, "12n");
   } else {
     lastX = null;
     lastY = null;
@@ -148,9 +138,16 @@ function setup() {
 //new
 window.addEventListener("keydown", function(event) {
   if (event.code === "Space" && !event.repeat) {
+    const time = Date.now();
     spacePresses++;
 
+    if (lastSpaceTime !== null) {
+      const seconds = (time - lastSpaceTime) / 1000;
+      console.log("Time between presses:", seconds.toFixed(2), "seconds");
+    }
+
     console.log("Number of space presses:", spacePresses);
+    lastSpaceTime = time;
 
     rectangle.element.style.transform = "scale(0.95)";
     metalSynth.triggerAttackRelease("8n");
@@ -166,7 +163,6 @@ window.addEventListener("keyup", function(event) {
   // Tara - End
 
   // Put your event listener code here
-  window.addEventListener("pointerdown", pointerDown);
   window.addEventListener("pointermove", pointerMove);
 }
 
