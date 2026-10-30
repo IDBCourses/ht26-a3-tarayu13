@@ -32,6 +32,16 @@ const note = "C4"; // the note played when the pointer goes down
 // State variables are the parts of your program that change over time.
 // For example: where the pointer is, how fast it's moving, or whether a drone is on.
 let smallCircle;
+//new
+let spacePresses = 0;
+//new end
+
+//nytt
+let speeds = [];
+let lastX = null;
+let lastY = null;
+let lastTime = null;
+//nytt end
 
 // ---------- Sound ----------
 // Make the instruments and plug them into the speakers.
@@ -66,7 +76,7 @@ function rectangleClick() {
 // Tara end
 
 
-// Tara start
+// Tara start ny
 function pointerMove(event) {
   const centerX = window.innerWidth * 0.50 + 100;
   const centerY = window.innerHeight * 0.35 + 100;
@@ -77,15 +87,42 @@ function pointerMove(event) {
     event.clientY > centerY - 60 &&
     event.clientY < centerY + 60
   ) {
+    const time = Date.now();
+    const normX = event.clientX / window.innerWidth;
+    const normY = event.clientY / window.innerHeight;
+
+    if (lastTime !== null && time > lastTime) {
+      const distance = Math.hypot(normX - lastX, normY - lastY);
+      const seconds = (time - lastTime) / 1000;
+      const speed = distance / seconds;
+
+      speeds.push(speed);
+
+      if (speeds.length > 10) {
+        speeds.shift();
+      }
+
+      const average = speeds.reduce((a, b) => a + b, 0) / speeds.length;
+      console.log("Average speed:", average.toFixed(2));
+    }
+
+    lastX = normX;
+    lastY = normY;
+    lastTime = time;
+
     smallCircle.setPosition(
       (event.clientX - 25) / window.innerWidth,
       (event.clientY - 25) / window.innerHeight
     );
+
     synth.triggerAttackRelease("C4", "12n");
+  } else {
+    lastX = null;
+    lastY = null;
+    lastTime = null;
   }
 }
-
-// Tara end
+// Tara end ny
 
 // ---------- Setup ----------
 // Setup is run once, at the start of the program. It sets everything up for us!
@@ -108,13 +145,18 @@ function setup() {
   rectangle.setRoundedness(0);
   rectangle.setPosition(0.30, 0.35);
   rectangle.setColour(280, 60, 35);
-
+//new
 window.addEventListener("keydown", function(event) {
-  if (event.code === "Space", !event.repeat) {
+  if (event.code === "Space" && !event.repeat) {
+    spacePresses++;
+
+    console.log("Number of space presses:", spacePresses);
+
     rectangle.element.style.transform = "scale(0.95)";
     metalSynth.triggerAttackRelease("8n");
   }
 });
+//new end
 
 window.addEventListener("keyup", function(event) {
   if (event.code === "Space") {
