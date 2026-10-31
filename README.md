@@ -2,18 +2,29 @@
 
 **Play it here:** <!-- Paste your GitHub Pages link here, e.g. https://idbcourses.github.io/your-repo-name/ -->
 
-**Name:** <!-- Your name and MAU ID -->
+**Name: Tara Yu Namo |at0962** <!-- Your name and MAU ID -->
 
 <!-- One or two sentences: what kind of instrument is it, and what is it like to play? -->
-
+This instrument is inspired by a DJ board, where the circles represent a spinning turntable that creates sound when you move the pointer.
+The purple rectangle acts like a button that triggers a beat or bass sound when you press key (space).
 ## How to play
 
 <!-- Fill in the table with a row for everything the player can do with the pointer: clicking, moving slowly or fast, moving in circles, holding still... Say what happens to the sound and to the shapes. If you added keys, give them rows too. -->
 
-| When you...  | The sound...                         | The shapes... |
-| ------------ | ------------------------------------ | ------------- |
-| Click or tap | Plays a C4 (the example: replace it) | Nothing yet   |
-|              |                                      |               |
+| When you...             | The sound...     | The shapes...                         |
+| ----------------------- | ---------------- | ------------------------------------- |
+| Move the pointer inside | Plays a C4, 12n, | The small orange circle follows the   |
+| the green circle.       | MonoSynth.       | pointer in the green circle 2zone".   |
+| ----------------------- | ---------------- | ------------------------------------- |
+| Press space.            | Plays a metalic  | The purple rectangle shrinks, like    |
+|                         | sound, metalSynth| a button.                             |
+| ----------------------- | ---------------- | ------------------------------------- |
+| Release space.          | Plays no sound.  | The purple rectangle returns to       |
+|                         |                  | normal size, like a button.           |
+| ----------------------- | ---------------- | ------------------------------------- |
+| The console shows the small orange circle's pointer speed and the purple           |
+| rectangle's number of key (space) presses and time between each key press.         |
+| ---------------------------------------------------------------------------------- |
 
 <!-- Anything else a player needs to know: how to get started, a good thing to try first. -->
 
